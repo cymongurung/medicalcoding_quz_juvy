@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medical Coding Mastery Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="head">
+    <div class="brand">Medical Coding Mastery<small>400-question practice trainer</small></div>
+    <div id="timer" class="timer">--:--:--</div>
+  </div>
+</header>
+
+<div class="layout">
+<nav>
+  <button class="active" data-view="dashboard">🏠 Dashboard</button>
+  <button data-view="practice">📝 Practice</button>
+  <button data-view="mock">⏱ Mock Exam</button>
+  <button data-view="mistakes">❌ Review Mistakes</button>
+  <button data-view="bookmarks">🔖 Bookmarks</button>
+  <button data-view="progress">📊 My Progress</button>
+</nav>
+
+<main>
+<section id="dashboard" class="view active">
+  <div class="panel hero">
+    <h2>Build your coding skills step by step</h2>
+    <p>Start with short learning sessions, then move toward timed exam practice. Questions are randomized from all 400 source questions.</p>
+    <div style="margin-top:16px"><button class="btn primary" onclick="startMode(5,'practice')">Start 5-Question Practice</button></div>
+  </div>
+  <div class="grid">
+    <div class="stat"><b id="stAnswered">0</b><span>Answered</span></div>
+    <div class="stat"><b id="stAccuracy">0%</b><span>Overall accuracy</span></div>
+    <div class="stat"><b id="stMistakes">0</b><span>Questions to review</span></div>
+    <div class="stat"><b id="stBookmarks">0</b><span>Bookmarks</span></div>
+  </div>
+  <div class="section-title"><h3>Recommended learning path</h3></div>
+  <div class="panel">
+    <div class="topic-row"><div class="top"><b>Level 1 — Learning</b><span>5 questions</span></div><div class="small">Immediate feedback. Focus on understanding the question and answer.</div></div>
+    <div class="topic-row"><div class="top"><b>Level 2 — Practice</b><span>10 questions</span></div><div class="small">Immediate feedback and automatic mistake tracking.</div></div>
+    <div class="topic-row"><div class="top"><b>Level 3 — Challenge</b><span>20 questions</span></div><div class="small">Timed practice with randomized questions.</div></div>
+    <div class="topic-row"><div class="top"><b>Level 4 — Exam Practice</b><span>50 questions</span></div><div class="small">Longer timed session with exam-style scoring.</div></div>
+    <div class="topic-row"><div class="top"><b>Level 5 — Full Mock</b><span>100 questions</span></div><div class="small">Full 4-hour test using 100 randomized questions.</div></div>
+  </div>
+</section>
+
+<section id="practice" class="view">
+  <div class="panel">
+    <div class="toolbar">
+      <label><b>Session size</b></label>
+      <select id="practiceSize">
+        <option value="5">5 — Learning</option><option value="10">10 — Practice</option><option value="20">20 — Challenge</option>
+      </select>
+      <button class="btn primary" onclick="startMode(+practiceSize.value,'practice')">New Random Practice</button>
+      <span class="small">Questions are stacked vertically, 5 per page.</span>
+    </div>
+    <div id="practiceStatus" class="info">Choose a session to begin.</div>
+  </div>
+  <div id="practiceArea"></div>
+</section>
+
+<section id="mock" class="view">
+  <div class="panel">
+    <h2 style="margin-top:0">Timed Mock Exam</h2>
+    <p class="small">The timer is proportional to 100 questions = 4 hours.</p>
+    <div class="mode-grid">
+      <button class="mode" onclick="startMode(10,'mock')"><b>10</b><small>24 minutes</small></button>
+      <button class="mode" onclick="startMode(20,'mock')"><b>20</b><small>48 minutes</small></button>
+      <button class="mode" onclick="startMode(50,'mock')"><b>50</b><small>2 hours</small></button>
+      <button class="mode" onclick="startMode(100,'mock')"><b>100</b><small>4 hours</small></button>
+      <button class="mode" onclick="startMode(5,'mock')"><b>5</b><small>12 minutes</small></button>
+    </div>
+    <div id="mockStatus" class="info" style="margin-top:14px">Starting a mock exam randomizes the question set.</div>
+  </div>
+  <div id="mockArea"></div>
+</section>
+
+<section id="mistakes" class="view">
+  <div class="panel">
+    <h2 style="margin-top:0">Review Mistakes</h2>
+    <p class="small">Questions answered incorrectly are saved here. Repeat them until you are comfortable.</p>
+    <button class="btn primary" onclick="startMistakes()">Practice My Mistakes</button>
+    <button class="btn secondary" onclick="clearMistakes()">Clear Mistake History</button>
+  </div>
+  <div id="mistakeArea"></div>
+</section>
+
+<section id="bookmarks" class="view">
+  <div class="panel">
+    <h2 style="margin-top:0">Bookmarks</h2>
+    <p class="small">Bookmark difficult questions while practicing so you can return to them later.</p>
+  </div>
+  <div id="bookmarkArea"></div>
+</section>
+
+<section id="progress" class="view">
+  <div class="panel">
+    <h2 style="margin-top:0">My Progress</h2>
+    <div id="progressArea"></div>
+  </div>
+</section>
+</main>
+</div>
+
+<div id="submitModal" class="modal-backdrop"><div class="modal"><h2 id="modalTitle">Submit all answers?</h2><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div></div>
+<script src="script.js"></script>
+</body>
+</html>
